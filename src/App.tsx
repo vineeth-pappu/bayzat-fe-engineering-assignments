@@ -1,9 +1,12 @@
+import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
-import MoviesHome from "./containers/MoviesHome";
+import MovieRoutes from "./routes/movie.routes";
 
 function App() {
   return (
-    <MoviesHome />
+    <BrowserRouter>
+      <MovieRoutes />
+    </BrowserRouter>
   )
 }
 

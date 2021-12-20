@@ -1,4 +1,3 @@
-import { differenceInDays, fromUnixTime } from "date-fns";
 import { useState } from "react";
 import "./App.scss";
 import MovieList from "./components/MovieList";

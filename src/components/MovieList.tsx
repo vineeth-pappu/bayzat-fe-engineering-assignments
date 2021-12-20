@@ -1,4 +1,4 @@
-import { Movie as IMovie } from "../movies";
+import { IMovie } from "../models/movie.interface";
 import Movie from "./Movie";
 
 

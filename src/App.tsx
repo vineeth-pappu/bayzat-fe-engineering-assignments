@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import MovieList from "./components/MovieList";
-import { Movie, movies } from "./movies";
+import { IMovie } from "./models/movie.interface";
+import { getMovies } from "./services/movie.service";
 
 function App() {
-  const [leftList, setLeftList] = useState(movies);
-  const [rightList, setRightList] = useState([] as Movie[]);
+  const [leftList, setLeftList] = useState([] as IMovie[]);
+  const [rightList, setRightList] = useState([] as IMovie[]);
   const [search, setSearch] = useState("");
 
-  const onAddClick = (movie: Movie) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const movies = await getMovies()
+      console.log('movies data', movies)
+
+      setLeftList(movies)
+    }
+    
+    fetchData()
+  }, [])
+
+  const onAddClick = (movie: IMovie) => {
     rightList.push(movie);
     setRightList(rightList);
 
@@ -16,7 +28,7 @@ function App() {
     setLeftList(newLeftList);
   };
 
-  const onRemoveClick = (movie: Movie) => {
+  const onRemoveClick = (movie: IMovie) => {
     leftList.push(movie);
     setLeftList(leftList);
 
@@ -38,7 +50,7 @@ function App() {
         <MovieList 
           movies={leftList} 
           searchStr={search} 
-          callToAction={(movie: Movie) => (
+          callToAction={(movie: IMovie) => (
             <button id="add-button" onClick={() => onAddClick(movie)}>
               Add
             </button>
@@ -50,7 +62,7 @@ function App() {
         <MovieList 
           movies={rightList} 
           searchStr={search} 
-          callToAction={(movie: Movie) => (
+          callToAction={(movie: IMovie) => (
             <button id="remove-button" onClick={() => onRemoveClick(movie)}>
               Remove
             </button>

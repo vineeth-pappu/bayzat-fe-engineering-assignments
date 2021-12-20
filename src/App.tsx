@@ -5,7 +5,7 @@ import { Movie, movies } from "./movies";
 
 function App() {
   const [leftList, setLeftList] = useState(movies);
-  const [rightList, setRightList] = useState([]);
+  const [rightList, setRightList] = useState([] as Movie[]);
   const [search, setSearch] = useState("");
 
   const onAddClick = (movie: Movie) => {
